@@ -83,7 +83,7 @@ private:
 	float m_damage = 1;
 	Vector2 m_target;
 
-	Vector2 m_direction;
+	Vector2 m_direction = Vector2(0,1);   
 	float const rotationSpeed = 0.1f;
 
 	bool m_wasShotByPlayer = true;
