@@ -3,6 +3,7 @@
 #include "MainMenuScreen.h"
 #include "Level.h"
 #include "Level01.h"
+#include "SpaceFighter.h"
 
 GameplayScreen::GameplayScreen(const int levelIndex)
 	: m_levelIndex(levelIndex)
@@ -42,6 +43,7 @@ void GameplayScreen::HandleInput(const InputState& input)
 void GameplayScreen::Update(const GameTime& gameTime)
 {
 	m_pLevel->Update(gameTime);
+	SpaceFighter::level = m_pLevel;
 }
 
 void GameplayScreen::Draw(SpriteBatch& spriteBatch)

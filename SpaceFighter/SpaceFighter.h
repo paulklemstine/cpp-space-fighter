@@ -3,6 +3,7 @@
 
 #include "KatanaEngine.h"
 #include "SpriteBatch.h"
+#include "Level.h"
 
 using namespace KatanaEngine;
 
@@ -26,4 +27,6 @@ public:
 	/** @brief Called when the game determines it is time to draw a frame.
 		@param spriteBatch A reference to the game's sprite batch, used for rendering. */
 	virtual void Draw(SpriteBatch& spriteBatch);
+
+	static Level* level;
 };

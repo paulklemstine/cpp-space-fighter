@@ -81,8 +81,10 @@ private:
 
 	float m_speed = 500; // pixels per second
 	float m_damage = 1;
+	Vector2 m_target;
 
 	Vector2 m_direction;
+	float const rotationSpeed = 0.1f;
 
 	bool m_wasShotByPlayer = true;
 };
