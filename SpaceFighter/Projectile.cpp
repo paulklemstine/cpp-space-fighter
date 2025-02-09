@@ -10,6 +10,7 @@ Projectile::Projectile()
 {
 	SetDirection(-Vector2::UNIT_Y);
 	SetCollisionRadius(9);
+
 }
 
 void Projectile::Update(const GameTime& gameTime)
@@ -59,7 +60,7 @@ void Projectile::Update(const GameTime& gameTime)
 
 		SetPosition(closestPosition);
 		m_direction = newDirection;
-		m_speed += 1f;
+		m_speed += 10.0f;
 
 
 		Vector2 size = s_pTexture->GetSize();
@@ -87,6 +88,7 @@ void Projectile::Draw(SpriteBatch& spriteBatch)
 void Projectile::Activate(const Vector2& position, bool wasShotByPlayer)
 {
 	m_wasShotByPlayer = wasShotByPlayer;
+	m_speed = 20;
 	SetPosition(position);
 
 	GameObject::Activate();
