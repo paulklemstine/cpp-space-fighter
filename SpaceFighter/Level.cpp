@@ -252,6 +252,7 @@ void Level::Draw(SpriteBatch& spriteBatch)
 		spriteBatch.Draw(m_pBackground, vecScrollingBackground-Vector2(width,0), Color::WHITE * alpha);
 		spriteBatch.Draw(m_pBackground, vecScrollingBackground - Vector2(width, height), Color::WHITE * alpha);
 		spriteBatch.Draw(m_pBackground, vecScrollingBackground - Vector2(0, height), Color::WHITE * alpha);
+		if ((m_pPlayerShip->getDirection()).Length()>0.5f)vecDirection = m_pPlayerShip->getDirection() * -10.0f;
 		vecScrollingBackground += vecDirection;
 		if (vecScrollingBackground.X>width)vecScrollingBackground.X-=width;
 		if (vecScrollingBackground.Y > height)vecScrollingBackground.Y -= height;

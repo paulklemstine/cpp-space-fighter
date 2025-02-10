@@ -43,6 +43,10 @@ public:
 		@param direction The desired direction. */
 	virtual void SetDesiredDirection(const Vector2 direction) { m_desiredDirection.Set(direction); }
 
+	/** @brief Gets the desired direction of the player ship, based on input.
+	@param direction The desired direction. */
+	virtual Vector2 getDirection() { return m_desiredDirection; }
+
 	/** @brief Gets the string representation of the player ship.
 		@return Returns the string "Player Ship". */
 	virtual std::string ToString() const { return "Player Ship"; }

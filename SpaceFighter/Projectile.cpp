@@ -43,11 +43,19 @@ std::vector<Color> rainbow = {
 	Color(1.0f, 1.0f, 0.0f), 
 	Color(0.0f, 1.0f, 0.0f),
 	Color(0.0f, 0.0f, 1.0f),
-	Color(0.29, 0.0f, 0.51f), 
+	Color(0.3f, 0.0f, 0.5f), 
 	Color(0.5f, 0.0f, 0.5f),
 	Color(0.8f, 0.0f, 0.2f),
-	Color(0.95f, 0.75f, 0.0f),
-	Color(0.0f, 0.5f, 1.0f)
+	Color(1.0f, 0.8f, 0.0f),
+	Color(0.0f, 0.5f, 1.0f),
+	Color(1.0f, 0.8f, 0.0f),
+	Color(0.8f, 0.0f, 0.2f),
+	Color(0.5f, 0.0f, 0.5f),
+	Color(0.3f, 0.0f, 0.5f),
+	Color(0.0f, 0.0f, 1.0f),
+	Color(0.0f, 1.0f, 0.0f),
+	Color(1.0f, 1.0f, 0.0f),
+	Color(1.0f, 0.5f, 0.0f)
 };
 Color color;
 void Projectile::Update(const GameTime& gameTime)
@@ -125,7 +133,7 @@ void Projectile::Update(const GameTime& gameTime)
 		else if (position.X > Game::GetScreenWidth() + size.X) Deactivate();
 
 		//update rainbow flash color
-		color = rainbow[(int)(gameTime.GetTotalTime()*20.0f) % 10];
+		color = rainbow[(int)(gameTime.GetTotalTime()*20.0f) % rainbow.size()];
 	}
 
 	GameObject::Update(gameTime);
