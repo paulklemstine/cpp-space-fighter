@@ -117,7 +117,7 @@ void PlayerShip::Draw(SpriteBatch& spriteBatch)
 	if (IsActive())
 	{
 		const float alpha = GetCurrentLevel()->GetAlpha();
-		spriteBatch.Draw(m_pTexture, GetPosition(), Color::WHITE * alpha, m_pTexture->GetCenter());
+		spriteBatch.Draw(m_pTexture, GetPosition(), Color::WHITE * alpha, m_pTexture->GetCenter(),Vector2::ONE,atan2(PlayerShip::GetDesiredDirection().X, PlayerShip::GetDesiredDirection().Y));
 	}
 }
 

@@ -14,9 +14,7 @@ Projectile::Projectile()
 }
 
 
-//optimized variables, I'm not creating a million objects in the update loop. Could be further optimized by reusing variables instead of making twenty of them. 
-//also all these variable names have been selected by me personally, I am bad at naming variables. That's the best I have.
-// All the mathematics below were also crafted by hand, mostly by trial and error.
+//variables to hold targeting calculations in the update loop
 Vector2 position;
 EnemyShip* NearestEnemy;
 Vector2 translation;
@@ -146,7 +144,8 @@ void Projectile::Draw(SpriteBatch& spriteBatch)
 		const float alpha = GetCurrentLevel()->GetAlpha();
 
 		spriteBatch.Draw(s_pTexture, GetPosition(), color * alpha, s_pTexture->GetCenter(), Vector2::ONE, atan2(m_direction.X, -m_direction.Y));
-		//spriteBatch.Draw(s_pTexture, m_target, Color::RED * alpha, s_pTexture->GetCenter());
+		//draw targeting lock on. I need to change sprite to something better than ithe same texture eventually
+		spriteBatch.Draw(s_pTexture, m_target, Color::RED * alpha, s_pTexture->GetCenter());
 	}
 }
 

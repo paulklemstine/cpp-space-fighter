@@ -54,7 +54,7 @@ Level::Level()
 	//pMissileLauncher->SetProjectilePool(&m_projectiles);
 	//m_pPlayerShip->AttachItem(pMissileLauncher, Vector2::UNIT_Y * -20);
 
-	for (int i = 0; i < 1000; i++)
+	for (int i = 0; i < 100; i++)
 	{
 		Projectile *pProjectile = new Projectile();
 		m_projectiles.push_back(pProjectile);
@@ -200,7 +200,7 @@ void Level::SpawnExplosion(GameObject *pExplodingObject)
 	const float aproximateTextureRadius = 120;
 	const float objectRadius = pExplodingObject->GetCollisionRadius();
 	const float scaleToObjectSize = (1 / aproximateTextureRadius) * objectRadius * 2;
-	const float dramaticEffect = 15.2f;
+	const float dramaticEffect = 5.2f;
 	const float scale = scaleToObjectSize * dramaticEffect;
 	pExplosion->Activate(pExplodingObject->GetPosition(), scale);
 }
