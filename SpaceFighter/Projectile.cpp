@@ -125,7 +125,6 @@ void Projectile::Update(const GameTime& gameTime)
 		else if (position.X > Game::GetScreenWidth() + size.X) Deactivate();
 
 		//update rainbow flash color
-		std::cout << (int)(gameTime.GetTotalTime() * 20.0f) % 10<<std::endl;
 		color = rainbow[(int)(gameTime.GetTotalTime()*20.0f) % 10];
 	}
 
