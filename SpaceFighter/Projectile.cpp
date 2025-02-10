@@ -13,57 +13,96 @@ Projectile::Projectile()
 
 }
 
+
+//optimized variables, I'm not creating a million objects in the update loop. Could be further optimized by reusing variables instead of making twenty of them. 
+//also all these variable names have been selected by me personally, I am bad at naming variables. That's the best I have.
+// All the mathematics below were also crafted by hand, mostly by trial and error.
+Vector2 position;
+EnemyShip* NearestEnemy;
+Vector2 translation;
+Vector2 newPositionCenter;
+float m_rad_direction_left;
+Vector2 m_directionLeft;
+Vector2 translationLeft;
+Vector2 newPositionLeft;
+float m_rad_direction_right;
+Vector2 m_directionRight;
+Vector2 translationRight;
+Vector2 newPositionRight;
+float distCenter;
+float distLeft;
+float distRight;
+Vector2 closestPosition;
+Vector2 newDirection;
+Vector2 size;
+
 void Projectile::Update(const GameTime& gameTime)
 {
 	if (IsActive())
 	{
-		Vector2 position = GetPosition();
+		 position = GetPosition();
 
-		EnemyShip* NearestEnemy = SpaceFighter::level->GetClosestObject<EnemyShip>(position, 20000);
+		//find the nearest active enemy
+		NearestEnemy = SpaceFighter::level->GetClosestObject<EnemyShip>(position, 20000);
 
+		//I'm not sure nullptr is ever returned here, ememies are always targeted
 		if (NearestEnemy != nullptr) {
+			//target nearest enemy
 			m_target = NearestEnemy->GetPosition();
 		}
 		else {
+			//keep missile circliung around player ship
 			m_target = position;
 		}
 
-		Vector2 translation = m_direction * m_speed * gameTime.GetElapsedTime();
-		Vector2 newPositionCenter = position + translation;
+		//predict projectile's next position
+		translation = m_direction * m_speed * gameTime.GetElapsedTime();
+		newPositionCenter = position + translation;
 
-		float m_rad_direction_left = std::atan2(m_direction.Y, m_direction.X) - m_rotationSpeed;
-		Vector2 m_directionLeft = Vector2(std::cos(m_rad_direction_left), std::sin(m_rad_direction_left));
-		Vector2 translationLeft = m_directionLeft * m_speed * gameTime.GetElapsedTime();
-		Vector2 newPositionLeft = position + translationLeft;
+		//predict projectiles next position if it veers to the left a little
+		m_rad_direction_left = std::atan2(m_direction.Y, m_direction.X) - m_rotationSpeed;
+		m_directionLeft = Vector2(std::cos(m_rad_direction_left), std::sin(m_rad_direction_left));
+		translationLeft = m_directionLeft * m_speed * gameTime.GetElapsedTime();
+		newPositionLeft = position + translationLeft;
 
-		float m_rad_direction_right = std::atan2(m_direction.Y, m_direction.X) + m_rotationSpeed;
-		Vector2 m_directionRight = Vector2(std::cos(m_rad_direction_right), std::sin(m_rad_direction_right));
-		Vector2 translationRight = m_directionRight * m_speed * gameTime.GetElapsedTime();
-		Vector2 newPositionRight = position + translationRight;
+		//predict projectile location if it veers to the right a little
+		m_rad_direction_right = std::atan2(m_direction.Y, m_direction.X) + m_rotationSpeed;
+		m_directionRight = Vector2(std::cos(m_rad_direction_right), std::sin(m_rad_direction_right));
+		translationRight = m_directionRight * m_speed * gameTime.GetElapsedTime();
+		newPositionRight = position + translationRight;
 
-		float distCenter = m_target.Distance(newPositionCenter, m_target);
-		float distLeft = m_target.Distance(newPositionLeft, m_target);
-		float distRight = m_target.Distance(newPositionRight, m_target);
+		//calculate the distance from the predicted projectile paths to the target
+		distCenter = m_target.Distance(newPositionCenter, m_target);
+		distLeft = m_target.Distance(newPositionLeft, m_target);
+		distRight = m_target.Distance(newPositionRight, m_target);
 
-		Vector2 closestPosition = newPositionCenter;
-		Vector2 newDirection = m_direction;
+		//determine which projected projectile path is best, use that one.
+		closestPosition = newPositionCenter;
+		newDirection = m_direction;
 
 		if (distLeft < distCenter) {
+			//veer to the left
 			closestPosition = newPositionLeft;
 			newDirection = m_directionLeft;
 		}
 
 		if (distRight < distLeft) {
+			//veer to the right
 			closestPosition = newPositionRight;
 			newDirection = m_directionRight;
 		}
 
+		//make the changes to position and direction
 		SetPosition(closestPosition);
 		m_direction = newDirection;
+
+		//speed up the missile, always acceleration
 		m_speed += 10.0f;
+
+		//fast missiles can't turn fast, the value 30/speed feels about right.
 		if (m_rotationSpeed>0)m_rotationSpeed = 30.0f/m_speed;
 
-		Vector2 size = s_pTexture->GetSize();
+		size = s_pTexture->GetSize();
 
 		// Is the projectile off the screen?
 		if (position.Y < -size.Y) Deactivate();
