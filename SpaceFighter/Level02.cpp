@@ -29,13 +29,13 @@ void Level02::LoadContent(ResourceManager& resourceManager)
 		3.5, 0.3, 0.3, 0.3, 0.3, 0.3
 	};
 
-	float delay = 1.0; // start delay
+	float delay = 3.0f;// start delay
 	Vector2 position;
 
 	for (int ii = 0;ii < 100;ii++) {
 		for (int i = 0; i < COUNT; i++)
 		{
-			delay += delays[i];
+			delay += (delays[i]/5.0f);
 			position.Set(xPositions[i] * Game::GetScreenWidth(), -pTexture->GetCenter().Y);
 
 			BioEnemyShip* pEnemy = new BioEnemyShip();
