@@ -19,7 +19,7 @@ void Projectile::Update(const GameTime& gameTime)
 	{
 		Vector2 position = GetPosition();
 
-		EnemyShip* NearestEnemy = SpaceFighter::level->GetClosestObject<EnemyShip>(position, 1000);
+		EnemyShip* NearestEnemy = SpaceFighter::level->GetClosestObject<EnemyShip>(position, 20000);
 
 		if (NearestEnemy != nullptr) {
 			m_target = NearestEnemy->GetPosition();

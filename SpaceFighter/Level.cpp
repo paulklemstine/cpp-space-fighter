@@ -60,7 +60,7 @@ Level::Level()
 		m_projectiles.push_back(pProjectile);
 		AddGameObject(pProjectile);
 	}
-	
+	m_pPlayerShip->SetSpeed(1500);
 	m_pPlayerShip->Activate();
 	AddGameObject(m_pPlayerShip);
 
@@ -200,7 +200,7 @@ void Level::SpawnExplosion(GameObject *pExplodingObject)
 	const float aproximateTextureRadius = 120;
 	const float objectRadius = pExplodingObject->GetCollisionRadius();
 	const float scaleToObjectSize = (1 / aproximateTextureRadius) * objectRadius * 2;
-	const float dramaticEffect = 20.2f;
+	const float dramaticEffect = 15.2f;
 	const float scale = scaleToObjectSize * dramaticEffect;
 	pExplosion->Activate(pExplodingObject->GetPosition(), scale);
 }

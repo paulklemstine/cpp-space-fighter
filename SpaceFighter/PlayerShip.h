@@ -75,8 +75,9 @@ private:
 
 	Vector2 m_desiredDirection;
 	Vector2 m_velocity;
+	
 
-	float m_responsiveness = 0;
+	float m_responsiveness = 1;
 
 	bool m_isConfinedToScreen = false;
 

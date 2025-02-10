@@ -2,7 +2,7 @@
 #include "GameplayScreen.h"
 #include "MainMenuScreen.h"
 #include "Level.h"
-#include "Level01.h"
+#include "Level02.h"
 #include "SpaceFighter.h"
 
 GameplayScreen::GameplayScreen(const int levelIndex)
@@ -28,7 +28,7 @@ void GameplayScreen::LoadLevel(const int levelIndex)
 
 	switch (levelIndex)
 	{
-	case 0: m_pLevel = new Level01(); break;
+	case 0: m_pLevel = new Level02(); break;
 	}
 
 	m_pLevel->SetGameplayScreen(this);
