@@ -31,17 +31,19 @@ void Level01::LoadContent(ResourceManager& resourceManager)
 
 	float delay = 3.0; // start delay
 	Vector2 position;
+	for (int ii = 0;ii < 10;ii++) {
 
-	for (int i = 0; i < COUNT; i++)
-	{
-		delay += delays[i];
-		position.Set(xPositions[i] * Game::GetScreenWidth(), -pTexture->GetCenter().Y);
+		for (int i = 0; i < COUNT; i++)
+		{
+			delay += delays[i];
+			position.Set(xPositions[i] * Game::GetScreenWidth(), -pTexture->GetCenter().Y);
 
-		BioEnemyShip *pEnemy = new BioEnemyShip();
-		pEnemy->SetTexture(pTexture);
-		pEnemy->SetCurrentLevel(this);
-		pEnemy->Initialize(position, (float)delay);
-		AddGameObject(pEnemy);
+			BioEnemyShip* pEnemy = new BioEnemyShip();
+			pEnemy->SetTexture(pTexture);
+			pEnemy->SetCurrentLevel(this);
+			pEnemy->Initialize(position, (float)delay);
+			AddGameObject(pEnemy);
+		}
 	}
 
 	// Setup background

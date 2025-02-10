@@ -13,6 +13,7 @@ void PlayerShip::LoadContent(ResourceManager& resourceManager)
 	pAudio->SetVolume(0.5f);
 	GetWeapon("Main Blaster")->SetFireSound(pAudio);
 
+
 	SetPosition(Game::GetScreenCenter() + Vector2::UNIT_Y * 300);
 
 }

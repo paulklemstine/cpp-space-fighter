@@ -67,6 +67,7 @@ void Ship::FireWeapons(TriggerType triggerType)
 	m_attachmentIt = m_attachments.begin();
 	for (; m_attachmentIt != m_attachments.end(); m_attachmentIt++)
 	{
+		
 		if (m_attachmentIt->second->GetAttachmentType() != "Weapon") continue;
 		((Weapon *)(m_attachmentIt->second))->Fire(triggerType);
 	}

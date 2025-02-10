@@ -1,4 +1,4 @@
-
+ 
 #pragma once
 
 #include "KatanaEngine.h"
@@ -9,6 +9,11 @@ class Projectile : public GameObject
 {
 
 public:
+
+	float m_speed = 500;
+	float m_rotationSpeed = 0.1f;
+
+	bool m_wasShotByPlayer = true;
 
 	/** @brief Instantiate a projectile object. */
 	Projectile();
@@ -79,13 +84,11 @@ private:
 
 	static Texture *s_pTexture;
 
-	float m_speed = 500; // pixels per second
 	float m_damage = 1;
 	Vector2 m_target;
 
 	Vector2 m_direction = Vector2(0,1);   
-	float const rotationSpeed = 0.1f;
 
-	bool m_wasShotByPlayer = true;
+
 };
 
