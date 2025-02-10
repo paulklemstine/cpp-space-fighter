@@ -36,6 +36,20 @@ Vector2 closestPosition;
 Vector2 newDirection;
 Vector2 size;
 
+//color cycle through rainbow colors
+std::vector<Color> rainbow = {
+	Color(1.0f, 0.0f, 0.0f), 
+	Color(1.0f, 0.5f, 0.0f),
+	Color(1.0f, 1.0f, 0.0f), 
+	Color(0.0f, 1.0f, 0.0f),
+	Color(0.0f, 0.0f, 1.0f),
+	Color(0.29, 0.0f, 0.51f), 
+	Color(0.5f, 0.0f, 0.5f),
+	Color(0.8f, 0.0f, 0.2f),
+	Color(0.95f, 0.75f, 0.0f),
+	Color(0.0f, 0.5f, 1.0f)
+};
+Color color;
 void Projectile::Update(const GameTime& gameTime)
 {
 	if (IsActive())
@@ -109,6 +123,10 @@ void Projectile::Update(const GameTime& gameTime)
 		else if (position.X < -size.X) Deactivate();
 		else if (position.Y > Game::GetScreenHeight() + size.Y) Deactivate();
 		else if (position.X > Game::GetScreenWidth() + size.X) Deactivate();
+
+		//update rainbow flash color
+		std::cout << (int)(gameTime.GetTotalTime() * 20.0f) % 10<<std::endl;
+		color = rainbow[(int)(gameTime.GetTotalTime()*20.0f) % 10];
 	}
 
 	GameObject::Update(gameTime);
@@ -119,7 +137,8 @@ void Projectile::Draw(SpriteBatch& spriteBatch)
 	if (IsActive())
 	{
 		const float alpha = GetCurrentLevel()->GetAlpha();
-		spriteBatch.Draw(s_pTexture, GetPosition(), Color::WHITE * alpha, s_pTexture->GetCenter(), Vector2::ONE, atan2(m_direction.X, -m_direction.Y));
+
+		spriteBatch.Draw(s_pTexture, GetPosition(), color * alpha, s_pTexture->GetCenter(), Vector2::ONE, atan2(m_direction.X, -m_direction.Y));
 		//spriteBatch.Draw(s_pTexture, m_target, Color::RED * alpha, s_pTexture->GetCenter());
 	}
 }
