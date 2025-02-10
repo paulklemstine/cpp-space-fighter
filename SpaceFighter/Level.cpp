@@ -54,7 +54,7 @@ Level::Level()
 	//pMissileLauncher->SetProjectilePool(&m_projectiles);
 	//m_pPlayerShip->AttachItem(pMissileLauncher, Vector2::UNIT_Y * -20);
 
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < 1000; i++)
 	{
 		Projectile *pProjectile = new Projectile();
 		m_projectiles.push_back(pProjectile);
