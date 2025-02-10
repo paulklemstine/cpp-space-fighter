@@ -238,7 +238,7 @@ void Level::CheckCollisions(std::vector<GameObject *> &gameObjects)
 }
 
 Vector2 vecScrollingBackground= Vector2::ZERO;
-Vector2 vecDirection = Vector2(0.45f, 0.45f);
+Vector2 vecDirection = Vector2(1.45f, 1.45f);
 void Level::Draw(SpriteBatch& spriteBatch)
 {
 	spriteBatch.Begin();
@@ -253,8 +253,10 @@ void Level::Draw(SpriteBatch& spriteBatch)
 		spriteBatch.Draw(m_pBackground, vecScrollingBackground - Vector2(width, height), Color::WHITE * alpha);
 		spriteBatch.Draw(m_pBackground, vecScrollingBackground - Vector2(0, height), Color::WHITE * alpha);
 		vecScrollingBackground += vecDirection;
-		if (vecScrollingBackground.X>width)vecScrollingBackground.X-width;
-		if (vecScrollingBackground.Y > height)vecScrollingBackground.Y - height;
+		if (vecScrollingBackground.X>width)vecScrollingBackground.X-=width;
+		if (vecScrollingBackground.Y > height)vecScrollingBackground.Y -= height;
+		if (vecScrollingBackground.X < 0)vecScrollingBackground.X += width;
+		if (vecScrollingBackground.Y < 0)vecScrollingBackground.Y += height;
 	}
 
 
