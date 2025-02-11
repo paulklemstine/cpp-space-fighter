@@ -3,6 +3,7 @@
 #include "Level.h"
 #include "EnemyShip.h"
 #include "SpaceFighter.h"
+#include "MathUtil.h"
 
 Texture* Projectile::s_pTexture = nullptr;
 
@@ -46,14 +47,7 @@ std::vector<Color> rainbow = {
 	Color(0.8f, 0.0f, 0.2f),
 	Color(1.0f, 0.8f, 0.0f),
 	Color(0.0f, 0.5f, 1.0f),
-	Color(1.0f, 0.8f, 0.0f),
-	Color(0.8f, 0.0f, 0.2f),
-	Color(0.5f, 0.0f, 0.5f),
-	Color(0.3f, 0.0f, 0.5f),
-	Color(0.0f, 0.0f, 1.0f),
-	Color(0.0f, 1.0f, 0.0f),
-	Color(1.0f, 1.0f, 0.0f),
-	Color(1.0f, 0.5f, 0.0f)
+
 };
 Color color;
 void Projectile::Update(const GameTime& gameTime)
@@ -63,7 +57,7 @@ void Projectile::Update(const GameTime& gameTime)
 		 position = GetPosition();
 
 		//find the nearest active enemy
-		NearestEnemy = SpaceFighter::level->GetClosestObject<EnemyShip>(position, 20000);
+		NearestEnemy = GetCurrentLevel()->GetClosestObject<EnemyShip>(position, 20000);
 
 		//I'm not sure nullptr is ever returned here, ememies are always targeted
 		if (NearestEnemy != nullptr) {
@@ -80,6 +74,7 @@ void Projectile::Update(const GameTime& gameTime)
 		newPositionCenter = position + translation;
 
 		//predict projectiles next position if it veers to the left a little
+
 		m_rad_direction_left = std::atan2(m_direction.Y, m_direction.X) - m_rotationSpeed;
 		m_directionLeft = Vector2(std::cos(m_rad_direction_left), std::sin(m_rad_direction_left));
 		translationLeft = m_directionLeft * m_speed * gameTime.GetElapsedTime();
@@ -117,10 +112,12 @@ void Projectile::Update(const GameTime& gameTime)
 		m_direction = newDirection;
 
 		//speed up the missile, always acceleration
-		m_speed += 10.0f;
-
+		m_speed += m_acceleration;
+		
 		//fast missiles can't turn fast, the value 30/speed feels about right.
-		if (m_rotationSpeed>0)m_rotationSpeed = 30.0f/m_speed;
+		float rotTemp = 30.0f / m_speed;
+		if (m_MaxRotationSpeed > rotTemp)m_rotationSpeed = rotTemp;
+		else m_rotationSpeed = m_MaxRotationSpeed;
 
 		size = s_pTexture->GetSize();
 
@@ -130,8 +127,7 @@ void Projectile::Update(const GameTime& gameTime)
 		else if (position.Y > Game::GetScreenHeight() + size.Y) Deactivate();
 		else if (position.X > Game::GetScreenWidth() + size.X) Deactivate();
 
-		//update rainbow flash color
-		color = rainbow[(int)(gameTime.GetTotalTime()*20.0f) % rainbow.size()];
+
 	}
 
 	GameObject::Update(gameTime);
@@ -142,7 +138,8 @@ void Projectile::Draw(SpriteBatch& spriteBatch)
 	if (IsActive())
 	{
 		const float alpha = GetCurrentLevel()->GetAlpha();
-
+		//update rainbow flash color
+		color = rainbow[(int)(m_speed / 300.0f) % rainbow.size()];
 		spriteBatch.Draw(s_pTexture, GetPosition(), color * alpha, s_pTexture->GetCenter(), Vector2::ONE, atan2(m_direction.X, -m_direction.Y));
 		//draw targeting lock on. I need to change sprite to something better than ithe same texture eventually
 		spriteBatch.Draw(s_pTexture, m_target, Color::RED * alpha, s_pTexture->GetCenter());
@@ -152,10 +149,7 @@ void Projectile::Draw(SpriteBatch& spriteBatch)
 void Projectile::Activate(const Vector2& position, bool wasShotByPlayer)
 {
 	m_wasShotByPlayer = wasShotByPlayer;
-	m_speed = Math::GetRandomFloat()*200.0f;
-	m_rotationSpeed = Math::GetRandomFloat()/9.0f;
 	SetPosition(position);
-
 	GameObject::Activate();
 }
 

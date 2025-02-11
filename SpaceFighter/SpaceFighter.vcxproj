@@ -183,6 +183,7 @@
     <ClCompile Include="Level02.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenuScreen.cpp" />
+    <ClCompile Include="MissileLauncher.cpp" />
     <ClCompile Include="PlayerShip.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Ship.cpp" />
@@ -208,6 +209,7 @@
     <ClInclude Include="Level01.h" />
     <ClInclude Include="Level02.h" />
     <ClInclude Include="MainMenuScreen.h" />
+    <ClInclude Include="MissileLauncher.h" />
     <ClInclude Include="PlayerShip.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="Ship.h" />

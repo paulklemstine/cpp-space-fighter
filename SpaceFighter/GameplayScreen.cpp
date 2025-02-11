@@ -43,7 +43,6 @@ void GameplayScreen::HandleInput(const InputState& input)
 void GameplayScreen::Update(const GameTime& gameTime)
 {
 	m_pLevel->Update(gameTime);
-	SpaceFighter::level = m_pLevel;
 }
 
 void GameplayScreen::Draw(SpriteBatch& spriteBatch)

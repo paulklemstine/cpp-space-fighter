@@ -1,22 +1,22 @@
 
-#include "Blaster.h"
+#include "MissileLauncher.h"
 
-void Blaster::Update(const GameTime & gameTime)
+void MissileLauncher::Update(const GameTime& gameTime)
 {
 	if (m_cooldown > 0) m_cooldown -= gameTime.GetElapsedTime();
 }
-
-void Blaster::Fire(TriggerType triggerType)
+void MissileLauncher::Fire(TriggerType triggerType)
 {
 	if (!IsActive()) return;
-	if (!CanFire()) return; 
+	if (!CanFire()) return;
 	if (!triggerType.Contains(GetTriggerType())) return;
 
 	Projectile* pProjectile = GetProjectile();
-	pProjectile->SetSpeed(1000);
-	pProjectile->SetAcceleration(0);
-	pProjectile->SetMaxRotationSpeed(0.0f);
-	pProjectile->SetDirection(Vector2(0,-1));
+	pProjectile->SetSpeed(100);
+	pProjectile->SetAcceleration(50);
+	pProjectile->SetMaxRotationSpeed(0.05f);
+	pProjectile->SetDirection(Vector2(0, -1));
+
 
 	if (!pProjectile) return;
 

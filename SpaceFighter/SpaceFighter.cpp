@@ -42,5 +42,3 @@ void SpaceFighter::Draw(SpriteBatch& spriteBatch)
 
 	DisplayFrameRate();
 }
-
-Level* SpaceFighter::level = nullptr;

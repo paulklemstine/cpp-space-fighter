@@ -3,6 +3,7 @@
 #include "EnemyShip.h"
 #include "Blaster.h"
 #include "GameplayScreen.h"
+#include "MissileLauncher.h"
 
 std::vector<Explosion *> Level::s_explosions;
 
@@ -46,13 +47,15 @@ Level::Level()
 
 	// Setup player ship
 	m_pPlayerShip = new PlayerShip();
+
 	Blaster *pBlaster = new Blaster("Main Blaster");
 	pBlaster->SetProjectilePool(&m_projectiles);
 	m_pPlayerShip->AttachItem(pBlaster, Vector2::UNIT_Y * -20);
 
-	//MissileLauncher* pMissileLauncher = new MissileLauncher("Missile Launcher");
-	//pMissileLauncher->SetProjectilePool(&m_projectiles);
-	//m_pPlayerShip->AttachItem(pMissileLauncher, Vector2::UNIT_Y * -20);
+	MissileLauncher* pMissileLauncher = new MissileLauncher("Missile Launcher");
+	pMissileLauncher->SetProjectilePool(&m_projectiles);
+	pMissileLauncher->SetTriggerType(TriggerType::Secondary);
+	m_pPlayerShip->AttachItem(pMissileLauncher, Vector2::UNIT_Y * -20);
 
 	for (int i = 0; i < 100; i++)
 	{
