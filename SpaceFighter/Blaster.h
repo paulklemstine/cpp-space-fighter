@@ -20,7 +20,7 @@ public:
 
 	/** @brief Check if the blaster is ready to fire.
 		@return True if the blaster is ready to fire. */
-	virtual bool CanFire() const { return m_cooldown <= 0; }
+	virtual bool CanFire() const { return m_cooldown <= 0 && m_ammo>0; }
 
 	/** @brief Reset the cooldown of the blaster. */
 	virtual void ResetCooldown() { m_cooldown = 0; }
