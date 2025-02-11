@@ -109,6 +109,9 @@ public:
 		return pClosest;
 	}
 
+	/** @brief Get the player's ship.
+	@return A pointer to the Playership. */
+	virtual PlayerShip* GetPlayerShip() { return m_pPlayerShip; }
 
 protected:
 
@@ -127,6 +130,8 @@ protected:
 	/** @brief Get the background audio for the level.
 		@return A pointer to the audio sample to play. */
 	virtual AudioSample* GetBackgroundAudio() { return m_pAudio; }
+
+
 
 private:
 
