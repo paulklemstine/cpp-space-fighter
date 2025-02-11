@@ -20,7 +20,7 @@ public:
 
 	/** @brief Check if the blaster is ready to fire.
 		@return True if the blaster is ready to fire. */
-	virtual bool CanFire() const { return m_cooldown <= 0; }
+	virtual bool CanFire() const { return m_cooldown <= 0 && m_ammo > 0; }
 
 	/** @brief Reset the cooldown of the blaster. */
 	virtual void ResetCooldown() { m_cooldown = 0; }
@@ -38,11 +38,11 @@ public:
 		@remark If the triggerType doesn't match that of the Blaster, the command will be ignored. */
 	virtual void Fire(TriggerType triggerType);
 
+	
 
 private:
 
 	float m_cooldown = 0;
-	float m_cooldownSeconds = 0.35;
-
+	float m_cooldownSeconds = 0.65;
 
 };

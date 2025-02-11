@@ -11,7 +11,7 @@ void FragCannon::Fire(TriggerType triggerType)
 	if (!IsActive()) return;
 	if (!CanFire()) return;
 	if (!triggerType.Contains(GetTriggerType())) return;
-
+	FireAmmo();
 	
 	float shots = 16;
 	for (float i = 0;i < shots;i++) {

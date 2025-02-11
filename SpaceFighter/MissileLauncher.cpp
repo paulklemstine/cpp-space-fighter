@@ -10,7 +10,7 @@ void MissileLauncher::Fire(TriggerType triggerType)
 	if (!IsActive()) return;
 	if (!CanFire()) return;
 	if (!triggerType.Contains(GetTriggerType())) return;
-
+	FireAmmo();
 	for (int i = 0;i < 10;i++) {
 		Projectile* pProjectile = GetProjectile();
 		if (!pProjectile) return;

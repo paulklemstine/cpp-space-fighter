@@ -113,6 +113,10 @@ public:
 	@return A pointer to the Playership. */
 	virtual PlayerShip* GetPlayerShip() { return m_pPlayerShip; }
 
+	/** @brief Get the bullet cout font.
+	@return A pointer to the collision manager. */
+	virtual Font* GetBulletCountFont() { return BulletCountFont; }
+
 protected:
 
 	/** @brief Get a pointer to the collision manager.
@@ -169,4 +173,5 @@ private:
 
 	virtual std::vector<GameObject*>* GetSectors() { return m_pSectors; }
 
+	Font* BulletCountFont = nullptr;
 };

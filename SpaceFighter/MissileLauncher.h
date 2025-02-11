@@ -20,7 +20,7 @@ public:
 
 	/** @brief Check if the missilelauncher is ready to fire.
 		@return True if the missilelauncher is ready to fire. */
-	virtual bool CanFire() const { return m_cooldown <= 0; }
+	virtual bool CanFire() const { return m_cooldown <= 0 && m_ammo>0; }
 
 	/** @brief Reset the cooldown of the missilelauncher. */
 	virtual void ResetCooldown() { m_cooldown = 0; }
@@ -43,6 +43,5 @@ private:
 
 	float m_cooldown = 0;
 	float m_cooldownSeconds = 0.50;
-
 
 };

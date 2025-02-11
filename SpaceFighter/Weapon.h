@@ -12,6 +12,7 @@ class Weapon : public IAttachment
 {
 
 public:
+	int m_ammo = 10000;
 
 	/** @brief Instantiate a weapon object.
 		@param key A string to help lookup attached items.
@@ -85,6 +86,18 @@ public:
 		@return Gets the type. */
 	virtual std::string GetAttachmentType() const override { return "Weapon"; }
 
+	/** @brief Return ammo count.
+		@return Ammo Count */
+	virtual int GetAmmoCount() { return m_ammo; }
+
+	/** @brief Set ammo count.
+	@return void */
+	virtual void SetAmmoCount(int ammo) { m_ammo=ammo; }
+	
+	/** @brief decrease ammo by 1.
+		@return void */
+	virtual void FireAmmo() { m_ammo-=1; }
+
 
 protected:
 
@@ -100,6 +113,8 @@ protected:
 		@return A pointer to a projectile.
 		@remark This helps us avoid instantiating projectiles while the level is running. */
 	virtual Projectile *GetProjectile();
+
+
 
 
 private:
@@ -118,6 +133,8 @@ private:
 	std::vector<Projectile *> *m_pProjectiles = nullptr;
 
 	AudioSample* m_pFireSound = nullptr;
+
+
 
 };
 

@@ -11,6 +11,7 @@ void Blaster::Fire(TriggerType triggerType)
 	if (!IsActive()) return;
 	if (!CanFire()) return; 
 	if (!triggerType.Contains(GetTriggerType())) return;
+	FireAmmo();
 
 	Projectile* pProjectile = GetProjectile();
 	pProjectile->SetSpeed(1000);

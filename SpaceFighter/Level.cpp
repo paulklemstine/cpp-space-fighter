@@ -51,16 +51,19 @@ Level::Level()
 
 	Blaster *pBlaster = new Blaster("Main Blaster");
 	pBlaster->SetProjectilePool(&m_projectiles);
+	pBlaster->SetAmmoCount(99);
 	m_pPlayerShip->AttachItem(pBlaster, Vector2::UNIT_Y * -20);
 
 	FragCannon* pFragCannon = new FragCannon("Frag Cannon");
 	pFragCannon->SetProjectilePool(&m_projectiles);
 	pFragCannon->SetTriggerType(TriggerType::Special);
+	pFragCannon->SetAmmoCount(20);
 	m_pPlayerShip->AttachItem(pFragCannon, Vector2::UNIT_Y * -20);
 
 	MissileLauncher* pMissileLauncher = new MissileLauncher("Missile Launcher");
 	pMissileLauncher->SetProjectilePool(&m_projectiles);
 	pMissileLauncher->SetTriggerType(TriggerType::Secondary);
+	pMissileLauncher->SetAmmoCount(20);
 	m_pPlayerShip->AttachItem(pMissileLauncher, Vector2::UNIT_Y * -20);
 
 	for (int i = 0; i < 100; i++)
@@ -101,7 +104,8 @@ Level::~Level()
 void Level::LoadContent(ResourceManager& resourceManager)
 {
 	m_pPlayerShip->LoadContent(resourceManager);
-
+	Font::SetLoadSize(30, true);
+	BulletCountFont = resourceManager.Load<Font>("Fonts\\arialbd.ttf", false);
 	// Setup explosions if they haven't been already
 	Explosion* pExplosion;
 	if (s_explosions.size() == 0) {
@@ -209,7 +213,7 @@ void Level::SpawnExplosion(GameObject *pExplodingObject)
 	const float aproximateTextureRadius = 120;
 	const float objectRadius = pExplodingObject->GetCollisionRadius();
 	const float scaleToObjectSize = (1 / aproximateTextureRadius) * objectRadius * 2;
-	const float dramaticEffect = 5.2f;
+	const float dramaticEffect = 7.2f;
 	const float scale = scaleToObjectSize * dramaticEffect;
 	pExplosion->Activate(pExplodingObject->GetPosition(), scale);
 }
@@ -276,7 +280,16 @@ void Level::Draw(SpriteBatch& spriteBatch)
 		GameObject *pGameObject = (*m_gameObjectIt);
 		pGameObject->Draw(spriteBatch);
 	}
-
+	char buffer[32];
+	sprintf_s(buffer, "     Primary: %d", GetPlayerShip()->GetWeapon("Main Blaster")->GetAmmoCount());
+	std::string text1 = buffer;
+	spriteBatch.DrawString(GetBulletCountFont(), &text1, Vector2(10, 20), Color::WHITE * alpha);
+	sprintf_s(buffer, "Secondary: %d", GetPlayerShip()->GetWeapon("Missile Launcher")->GetAmmoCount());
+	std::string text2 = buffer;
+	spriteBatch.DrawString(GetBulletCountFont(), &text2, Vector2(10, 60), Color::WHITE * alpha);
+	sprintf_s(buffer, "      Special: %d", GetPlayerShip()->GetWeapon("Frag Cannon")->GetAmmoCount());
+	std::string text3 = buffer;
+	spriteBatch.DrawString(GetBulletCountFont(), &text3, Vector2(10, 100), Color::WHITE * alpha);
 	spriteBatch.End();
 
 	// Explosions use additive blending so they need to be drawn after the main sprite batch
