@@ -4,6 +4,7 @@
 #include "Blaster.h"
 #include "GameplayScreen.h"
 #include "MissileLauncher.h"
+#include "FragCannon.h"
 
 std::vector<Explosion *> Level::s_explosions;
 
@@ -51,6 +52,11 @@ Level::Level()
 	Blaster *pBlaster = new Blaster("Main Blaster");
 	pBlaster->SetProjectilePool(&m_projectiles);
 	m_pPlayerShip->AttachItem(pBlaster, Vector2::UNIT_Y * -20);
+
+	FragCannon* pFragCannon = new FragCannon("Frag Cannon");
+	pFragCannon->SetProjectilePool(&m_projectiles);
+	pFragCannon->SetTriggerType(TriggerType::Special);
+	m_pPlayerShip->AttachItem(pFragCannon, Vector2::UNIT_Y * -20);
 
 	MissileLauncher* pMissileLauncher = new MissileLauncher("Missile Launcher");
 	pMissileLauncher->SetProjectilePool(&m_projectiles);

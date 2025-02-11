@@ -104,6 +104,9 @@
     <ClCompile Include="MissileLauncher.cpp">
       <Filter>Source Files\Game Objects\Weapons</Filter>
     </ClCompile>
+    <ClCompile Include="FragCannon.cpp">
+      <Filter>Source Files\Game Objects\Weapons</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MainMenuScreen.h">
@@ -161,6 +164,9 @@
       <Filter>Source Files\Game Objects\Misc</Filter>
     </ClInclude>
     <ClInclude Include="MissileLauncher.h">
+      <Filter>Source Files\Game Objects\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="FragCannon.h">
       <Filter>Source Files\Game Objects\Weapons</Filter>
     </ClInclude>
   </ItemGroup>

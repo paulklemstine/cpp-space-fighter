@@ -75,7 +75,7 @@ public:
 	@return The acceleration of the projectile. */
 	virtual float GetAcceleration() const { return m_acceleration; }
 
-	/** @brief Set the velocity of the projectile.
+	/** @brief Set the direction of the projectile.
 	@param direction The direction of the projectile. */
 	virtual void SetDirection(const Vector2 direction) { m_direction = direction; }
 

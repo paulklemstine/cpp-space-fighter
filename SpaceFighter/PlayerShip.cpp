@@ -47,7 +47,7 @@ void PlayerShip::HandleInput(const InputState& input)
 		TriggerType type = TriggerType::None;
 		if (input.IsKeyDown(Key::SPACE)) type |= TriggerType::Primary;
 		if (input.IsKeyDown(Key::D)) type |= TriggerType::Secondary;
-		//if (input.IsKeyDown(Key::S)) type |= TriggerType::Special;
+		if (input.IsKeyDown(Key::S)) type |= TriggerType::Special;
 
 		//// Handle Xbox Controller
 		//GamePadState* pState = input.GetGamePadState(0);

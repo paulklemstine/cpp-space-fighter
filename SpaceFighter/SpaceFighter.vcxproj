@@ -176,6 +176,7 @@
     <ClCompile Include="CollisionType.cpp" />
     <ClCompile Include="EnemyShip.cpp" />
     <ClCompile Include="Explosion.cpp" />
+    <ClCompile Include="FragCannon.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameplayScreen.cpp" />
     <ClCompile Include="Level.cpp" />
@@ -203,6 +204,7 @@
     <ClInclude Include="CollisionType.h" />
     <ClInclude Include="EnemyShip.h" />
     <ClInclude Include="Explosion.h" />
+    <ClInclude Include="FragCannon.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameplayScreen.h" />
     <ClInclude Include="Level.h" />

@@ -113,6 +113,11 @@ void Projectile::Update(const GameTime& gameTime)
 
 		//speed up the missile, always acceleration
 		m_speed += m_acceleration;
+		if (m_speed < 0) {
+			m_speed = 0;
+			Deactivate();
+			GetCurrentLevel()->SpawnExplosion(this);
+		}
 		
 		//fast missiles can't turn fast, the value 20/speed feels about right.
 		float rotTemp = 20.0f / m_speed;
