@@ -11,18 +11,21 @@ void MissileLauncher::Fire(TriggerType triggerType)
 	if (!CanFire()) return;
 	if (!triggerType.Contains(GetTriggerType())) return;
 
-	Projectile* pProjectile = GetProjectile();
-	pProjectile->SetSpeed(100);
-	pProjectile->SetAcceleration(50);
-	pProjectile->SetMaxRotationSpeed(0.05f);
-	pProjectile->SetDirection(Vector2(0, -1));
+	for (int i = 0;i < 10;i++) {
+		Projectile* pProjectile = GetProjectile();
+		if (!pProjectile) return;
+		pProjectile->SetSpeed(10.0f+ Math::GetRandomFloat() * 60.0f - 30.0f);
+		pProjectile->SetAcceleration(30.0f+ Math::GetRandomFloat() * 20.0f - 10.0f);
+		pProjectile->SetMaxRotationSpeed(0.05f);
+		pProjectile->SetDirection(Vector2(0, -1));
+		pProjectile->Activate(GetPosition()+Vector2(Math::GetRandomFloat()*60.0f -30.0f, Math::GetRandomFloat() * 20.0f - 10.0f), IsAttachedToPlayer());
+	}
 
-
-	if (!pProjectile) return;
+	
 
 	AudioSample* pAudio = GetFireSound();
 	if (pAudio) pAudio->Play();
 
-	pProjectile->Activate(GetPosition(), IsAttachedToPlayer());
+
 	m_cooldown = m_cooldownSeconds;
 }

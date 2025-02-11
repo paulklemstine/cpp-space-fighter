@@ -114,8 +114,8 @@ void Projectile::Update(const GameTime& gameTime)
 		//speed up the missile, always acceleration
 		m_speed += m_acceleration;
 		
-		//fast missiles can't turn fast, the value 30/speed feels about right.
-		float rotTemp = 30.0f / m_speed;
+		//fast missiles can't turn fast, the value 20/speed feels about right.
+		float rotTemp = 20.0f / m_speed;
 		if (m_MaxRotationSpeed > rotTemp)m_rotationSpeed = rotTemp;
 		else m_rotationSpeed = m_MaxRotationSpeed;
 
