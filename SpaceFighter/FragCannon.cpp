@@ -1,5 +1,6 @@
 
 #include "FragCannon.h"
+#include "Level.h"
 
 void FragCannon::Update(const GameTime& gameTime)
 {
@@ -13,6 +14,10 @@ void FragCannon::Fire(TriggerType triggerType)
 	if (!triggerType.Contains(GetTriggerType())) return;
 	FireAmmo();
 	
+	
+	
+	GetProjectile()->GetCurrentLevel()->SpawnExplosion(GetProjectile()->GetCurrentLevel()->GetPlayerShip());
+	
 	float shots = 16;
 	for (float i = 0;i < shots;i++) {
 		Projectile* pProjectile = GetProjectile();
@@ -25,7 +30,6 @@ void FragCannon::Fire(TriggerType triggerType)
 		pProjectile->SetDirection(Vector2(x,y));
 		pProjectile->Activate(GetPosition(), IsAttachedToPlayer());
 	}
-
 
 	AudioSample* pAudio = GetFireSound();
 	if (pAudio) pAudio->Play();

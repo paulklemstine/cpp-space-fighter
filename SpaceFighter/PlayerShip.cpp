@@ -11,11 +11,13 @@ void PlayerShip::LoadContent(ResourceManager& resourceManager)
 
 	AudioSample* pAudioGun = resourceManager.Load<AudioSample>("Audio\\Effects\\Laser.wav");
 	AudioSample* pAudioMissile = resourceManager.Load<AudioSample>("Audio\\Effects\\Missile.wav");
+	AudioSample* pAudioExplosion = resourceManager.Load<AudioSample>("Audio\\Effects\\Explosion.ogg");
 
 	pAudioGun->SetVolume(0.5f);
 	pAudioMissile->SetVolume(0.2f);
 	GetWeapon("Main Blaster")->SetFireSound(pAudioGun);
 	GetWeapon("Missile Launcher")->SetFireSound(pAudioMissile);
+	GetWeapon("Frag Cannon")->SetFireSound(pAudioExplosion);
 
 
 	SetPosition(Game::GetScreenCenter() + Vector2::UNIT_Y * 300);
