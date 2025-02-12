@@ -49,17 +49,21 @@ Level::Level()
 	// Setup player ship
 	m_pPlayerShip = new PlayerShip();
 
+
+	//attach a shiny new Blaster
 	Blaster *pBlaster = new Blaster("Main Blaster");
 	pBlaster->SetProjectilePool(&m_projectiles);
 	pBlaster->SetAmmoCount(99);
 	m_pPlayerShip->AttachItem(pBlaster, Vector2::UNIT_Y * -20);
 
+	//did someone say Frag Cannon!
 	FragCannon* pFragCannon = new FragCannon("Frag Cannon");
 	pFragCannon->SetProjectilePool(&m_projectiles);
 	pFragCannon->SetTriggerType(TriggerType::Special);
 	pFragCannon->SetAmmoCount(19);
 	m_pPlayerShip->AttachItem(pFragCannon, Vector2::UNIT_Y * -20);
 
+	//Missiles, missiles, missiles
 	MissileLauncher* pMissileLauncher = new MissileLauncher("Missile Launcher");
 	pMissileLauncher->SetProjectilePool(&m_projectiles);
 	pMissileLauncher->SetTriggerType(TriggerType::Secondary);
@@ -252,9 +256,8 @@ void Level::CheckCollisions(std::vector<GameObject *> &gameObjects)
 
 Vector2 vecScrollingBackground= Vector2::ZERO;
 Vector2 vecDirection = Vector2(1.45f, 1.45f);
-//color cycle through rainbow colors
+//color cycle through the colors, these indicate how many bullets are left.
 std::vector<Color> gradient = {
-	
 	Color(1.0f, 0.0f, 0.0f),
 	Color(1.0f, 0.5f, 0.0f),
 	Color(1.0f, 1.0f, 0.0f),

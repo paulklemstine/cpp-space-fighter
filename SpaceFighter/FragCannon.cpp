@@ -14,10 +14,10 @@ void FragCannon::Fire(TriggerType triggerType)
 	if (!triggerType.Contains(GetTriggerType())) return;
 	FireAmmo();
 	
-	
-	
+	//make an explosion centered around the ship
 	GetProjectile()->GetCurrentLevel()->SpawnExplosion(GetProjectile()->GetCurrentLevel()->GetPlayerShip());
 	
+	//fire 16 shots away from the player ship in a starburst pattern 
 	float shots = 16;
 	for (float i = 0;i < shots;i++) {
 		Projectile* pProjectile = GetProjectile();
